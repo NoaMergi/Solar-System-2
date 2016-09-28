@@ -5,16 +5,9 @@ public class spawnRingScript : MonoBehaviour
 {
     public int numObjectToSpawn;
 
-    //radius from the center of the hole to the center of the torus tube
-    public float radCenterToCenter;
-
-    //the radius of the tube
-    public float radTub;
-
     public List<GameObject> objects;
 
     private System.Random rand;
-    private float x, y, z;
 
     [SerializeField]
     private GameObject[] rockPrefab;
@@ -45,32 +38,25 @@ public class spawnRingScript : MonoBehaviour
     {
         //rand = new Random();
         rand = new System.Random();
+        for (int i = 0; i < numObjectToSpawn; i++)
+        {
+            spawn();
+        }
         
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        spawn();
+        //spawn();
 
     }
 
     void spawn()
     {
 
-        float u = getRandomFloat(0, 2 * Mathf.PI);
-        float v = getRandomFloat(0, 2 * Mathf.PI);
-
-        x = (radCenterToCenter + radTub * Mathf.Cos(v)) * Mathf.Cos(u);
-        z = (radCenterToCenter + radTub * Mathf.Cos(v)) * Mathf.Sin(u);
-        y = 0/*radTub * Mathf.Sin(v)*/;
-
-        //var t = GameObject.Instantiate(rockPrefab[getRandomInt(0, rockPrefab.Length)]);
-
         var rock = GameObject.Instantiate(rockPrefab[rand.Next(0, rockPrefab.Length-1)]);
         rock.transform.parent = gameObject.transform;
-        
-        rock.transform.position = new Vector3(x, y, z);
 
         //set rotation script values
         rotationScript aRotationScript = rock.GetComponent<rotationScript>();
@@ -85,6 +71,7 @@ public class spawnRingScript : MonoBehaviour
         aParametricPathScript.B = getRandomFloat(B.x, B.y);
         aParametricPathScript.parent = transform.parent.gameObject;
         aParametricPathScript.ParentRad = GetComponent<planetDataScript>().PlanetRadius;
+        aParametricPathScript.startingPoint = getRandomFloat(0, 360);
 
 
         objects.Add(rock);

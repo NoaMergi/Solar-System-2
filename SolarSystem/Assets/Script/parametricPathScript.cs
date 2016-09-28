@@ -40,11 +40,15 @@ public class parametricPathScript : MonoBehaviour
     [HideInInspector]
     public float scaledB;
 
+    public float startingPoint = 0;
+
 	// Use this for initialization
 	void Start () 
     {
         scaledA = A;
         scaledB = B;
+
+        PeriodStep = PeriodStep + startingPoint;
 
         ParentRad = parent.GetComponent<planetDataScript>().getRad();
         if (IsClockwise)
