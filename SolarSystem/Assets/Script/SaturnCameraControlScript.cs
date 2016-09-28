@@ -13,6 +13,12 @@ public class SaturnCameraControlScript : MonoBehaviour
     [SerializeField]
     private GameObject focus;
 
+    [SerializeField]
+    private float zoomVelocity;
+
+    [SerializeField]
+    private float moveVelocity;
+
     private float x, y, z;
 
     // Use this for initialization
@@ -26,6 +32,14 @@ public class SaturnCameraControlScript : MonoBehaviour
 
         transform.LookAt(focus.transform.position);
 
+        InputSystemScript.mouseWheelDown += zoomOut;
+        InputSystemScript.mouseWheelUp += zoomIn;
+        InputSystemScript.mouseLeft += moveLeft;
+        InputSystemScript.mouseRight += moveRight;
+        InputSystemScript.mouseDown += moveDown;
+        InputSystemScript.mouseUp += moveUp;
+
+
     }
 	
 	// Update is called once per frame
@@ -38,5 +52,57 @@ public class SaturnCameraControlScript : MonoBehaviour
         transform.position = new Vector3(x, y, z);
 
         transform.LookAt(focus.transform.position);
+    }
+
+    void OnDestroy()
+    {
+        InputSystemScript.mouseWheelDown -= zoomOut;
+        InputSystemScript.mouseWheelUp -= zoomIn;
+        InputSystemScript.mouseLeft -= moveLeft;
+        InputSystemScript.mouseRight -= moveRight;
+        InputSystemScript.mouseDown -= moveDown;
+        InputSystemScript.mouseUp -= moveUp;
+    }
+
+    void zoomOut()
+    {
+        if (radius < 50)
+        {
+            radius += zoomVelocity;
+        }
+    }
+
+    void zoomIn()
+    {
+        if (radius > 1)
+        {
+            radius -= zoomVelocity;
+        }
+    }
+
+    void moveLeft()
+    {
+        azimuthalCoordinate -= moveVelocity;
+        azimuthalCoordinate %= -2 * Mathf.PI;
+
+        //currentTime %= 1.0f;
+    }
+
+    void moveRight()
+    {
+        azimuthalCoordinate += moveVelocity;
+        azimuthalCoordinate %= 2*Mathf.PI;
+    }
+
+    void moveUp()
+    {
+        polarCoordinate -= moveVelocity;
+        polarCoordinate %= -2 * Mathf.PI;
+    }
+
+    void moveDown()
+    {
+        polarCoordinate += moveVelocity;
+        polarCoordinate %= +2 * Mathf.PI;
     }
 }

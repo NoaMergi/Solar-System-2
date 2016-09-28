@@ -14,6 +14,7 @@ public class CameraScript : MonoBehaviour
 	void Update () 
     {
         transform.LookAt(transform.parent.transform.position);
+        
         //transform.RotateAround(planet.transform.position,1);
 	}
 }

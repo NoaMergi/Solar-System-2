@@ -5,7 +5,7 @@ using System.Collections;
 public class InputSystemScript : MonoBehaviour
 {
     public delegate void inputSystem();
-    public static event inputSystem mouseWheelUP = delegate { };
+    public static event inputSystem mouseWheelUp = delegate { };
     public static event inputSystem mouseWheelDown = delegate { };
     public static event inputSystem mouseLeft = delegate { };
     public static event inputSystem mouseRight = delegate { };
@@ -23,32 +23,32 @@ public class InputSystemScript : MonoBehaviour
     {
         if (Input.GetAxis("Mouse X") < 0)
         {
-            print("Mouse moved left");
+            //print("Mouse moved left");
             mouseLeft.Invoke();
         }
         if (Input.GetAxis("Mouse X") > 0)
         {
-            print("Mouse moved right");
+            //print("Mouse moved right");
             mouseRight.Invoke();
         }
         if (Input.GetAxis("Mouse Y") < 0)
         {
-            print("Mouse moved down");
+            //print("Mouse moved down");
             mouseUp.Invoke();
         }
         if (Input.GetAxis("Mouse Y") > 0)
         {
-            print("Mouse moved up");
+            //print("Mouse moved up");
             mouseDown.Invoke();
         }
         if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
-            print("scroll up");
-            mouseWheelUP.Invoke();
+            //print("scroll up");
+            mouseWheelUp.Invoke();
         }
         if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
-            print("scroll down");
+            //print("scroll down");
             mouseWheelDown.Invoke();
         }
     }
