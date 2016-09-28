@@ -18,15 +18,14 @@ public class parametricPathScript : MonoBehaviour
     
     public bool isPlanet = false;
 
-    [SerializeField]
-    private float A;
+    public float A;
 
-    [SerializeField]
-    private float B;
+    public float B;
 
     public bool IsClockwise;
 
-    private float ParentRad;
+    [HideInInspector]
+    public float ParentRad;
 
     private float PeriodStep;
 

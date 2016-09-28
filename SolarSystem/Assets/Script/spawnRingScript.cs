@@ -11,6 +11,8 @@ public class spawnRingScript : MonoBehaviour
     //the radius of the tube
     public float radTub;
 
+    public List<GameObject> objects;
+
     private System.Random rand;
     private float x, y, z;
 
@@ -21,10 +23,25 @@ public class spawnRingScript : MonoBehaviour
     [SerializeField]
     private Vector2 rotationSpeedRange;
 
-    public List<GameObject> objects;
+    [SerializeField]
+    private float orbitPiriod;
 
-	// Use this for initialization
-	void Start ()
+    [SerializeField]
+    private float orbitAngle;
+
+    //range of a
+    [SerializeField]
+    private Vector2 A;
+
+    //range of b
+    [SerializeField]
+    private Vector2 B;
+
+
+
+
+    // Use this for initialization
+    void Start ()
     {
         //rand = new Random();
         rand = new System.Random();
@@ -51,9 +68,25 @@ public class spawnRingScript : MonoBehaviour
         //var t = GameObject.Instantiate(rockPrefab[getRandomInt(0, rockPrefab.Length)]);
 
         var rock = GameObject.Instantiate(rockPrefab[rand.Next(0, rockPrefab.Length-1)]);
+        rock.transform.parent = gameObject.transform;
+        
         rock.transform.position = new Vector3(x, y, z);
-        rock.GetComponent<rotationScript>().rotationAxis = new Vector3(getRandomFloat(0, 360), getRandomFloat(0, 360), getRandomFloat(0, 360));
-        rock.GetComponent<rotationScript>().rotationPeriodInHours = getRandomFloat(rotationSpeedRange.x, rotationSpeedRange.y);
+
+        //set rotation script values
+        rotationScript aRotationScript = rock.GetComponent<rotationScript>();
+        aRotationScript.rotationAxis = new Vector3(getRandomFloat(0, 360), getRandomFloat(0, 360), getRandomFloat(0, 360));
+        aRotationScript.rotationPeriodInHours = getRandomFloat(rotationSpeedRange.x, rotationSpeedRange.y);
+
+        //set orbit script values
+        parametricPathScript aParametricPathScript = rock.GetComponent<parametricPathScript>();
+        aParametricPathScript.Period = orbitPiriod;
+        aParametricPathScript.Orientation = new Vector3 (orbitAngle, 1,0);
+        aParametricPathScript.A = getRandomFloat(A.x, A.y);
+        aParametricPathScript.B = getRandomFloat(B.x, B.y);
+        aParametricPathScript.parent = transform.parent.gameObject;
+        aParametricPathScript.ParentRad = GetComponent<planetDataScript>().PlanetRadius;
+
+
         objects.Add(rock);
     }
 
@@ -69,3 +102,34 @@ public class spawnRingScript : MonoBehaviour
         return f;
     }
 }
+
+/*
+
+
+    public Vector3 Orientation;
+
+    public Vector3 berrayCenter;
+    
+    public bool isPlanet = false;
+
+    [SerializeField]
+    private float A;
+
+    [SerializeField]
+    private float B;
+
+    public bool IsClockwise;
+
+
+    private int Direction;
+
+    [HideInInspector]
+    public Vector3 ScaledberrayCenter;
+
+    [HideInInspector]
+    public float scaledA;
+
+    [HideInInspector]
+    public float scaledB;
+
+    */
