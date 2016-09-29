@@ -18,32 +18,39 @@ public class rotationScript : MonoBehaviour
     private const float timescale = 1f;
 
     //Rotation progress between 0 and 1
-    private float currentTime = 0f;
+    private float currentTime;
+    float prevRotationAngle;
 
     void Start()
     {
         Children = GetComponentsInChildren<Transform>();
+        currentTime = 0f;
+        prevRotationAngle = 0;
     }
 
     void Update()
     {
         //Debug.Log((Time.deltaTime * timescale / rotationPeriodInHours).ToString("F9"));
         currentTime += Time.deltaTime * timescale / rotationPeriodInHours;
+
+
         currentTime %= 1.0f;
+        
 
         float currentRotationAngle = currentTime * 360f;
 
-        
-
-        if( !isClockwise )
+        if ( !isClockwise )
         {
             currentRotationAngle *= -1f;
         }
 
         transform.DetachChildren();
 
-        transform.rotation = Quaternion.AngleAxis( currentRotationAngle, rotationAxis);
-        transform.Rotate(offsetAxis);
+        //Debug.Log(currentRotationAngle);
+        //transform.rotation = Quaternion.AngleAxis( currentRotationAngle, rotationAxis);
+        //transform.rotation = Quaternion.identity;
+        transform.Rotate(rotationAxis, currentRotationAngle - prevRotationAngle, Space.Self);
+        //transform.Rotate(offsetAxis);
         /*
         if (camera != null)
         {
@@ -55,7 +62,8 @@ public class rotationScript : MonoBehaviour
             child.parent = transform;
             //child is your child transform
         }
-        
+        prevRotationAngle = currentRotationAngle;
+
         //transform.rotation = Quaternion.AngleAxis(offsetValue, offsetAxis);
     }
 }
