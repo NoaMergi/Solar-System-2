@@ -51,14 +51,7 @@ public class parametricPathScript : MonoBehaviour
         PeriodStep = PeriodStep + startingPoint;
 
         ParentRad = parent.GetComponent<planetDataScript>().getRad();
-        if (IsClockwise)
-        {
-            Direction = 1;
-        }
-        else
-        {
-            Direction = -1;
-        }
+        setDirection();
 
         berrayCenter = new Vector3(14.9999551f, 0, 0);
         ScaledberrayCenter = new Vector3(14.9999551f, 0, 0);
@@ -132,4 +125,19 @@ public class parametricPathScript : MonoBehaviour
         else
             transform.localPosition = Ellipse(parent.transform.position, Orientation, angle, scaledA + ParentRad, scaledB + ParentRad);
 	}
+
+
+    public void setDirection()
+    {
+        if (IsClockwise)
+        {
+            Direction = 1;
+        }
+        else
+        {
+            Direction = -1;
+        }
+
+        //Debug.Log(Direction);
+    }
 }

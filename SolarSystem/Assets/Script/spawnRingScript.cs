@@ -5,6 +5,7 @@ public class spawnRingScript : MonoBehaviour
 {
     public int numObjectToSpawn;
 
+    [HideInInspector]
     public List<GameObject> objects;
 
     private System.Random rand;
@@ -29,6 +30,10 @@ public class spawnRingScript : MonoBehaviour
     //range of b
     [SerializeField]
     private Vector2 B;
+
+
+    [SerializeField]
+    private bool isClockWise;
 
 
 
@@ -56,6 +61,7 @@ public class spawnRingScript : MonoBehaviour
     {
 
         var rock = GameObject.Instantiate(rockPrefab[rand.Next(0, rockPrefab.Length-1)]);
+
         rock.transform.parent = gameObject.transform;
 
         //set rotation script values
@@ -72,6 +78,10 @@ public class spawnRingScript : MonoBehaviour
         aParametricPathScript.parent = transform.parent.gameObject;
         aParametricPathScript.ParentRad = GetComponent<planetDataScript>().PlanetRadius;
         aParametricPathScript.startingPoint = getRandomFloat(0, 360);
+        aParametricPathScript.IsClockwise = isClockWise;
+        aParametricPathScript.setDirection();
+
+
 
 
         objects.Add(rock);
