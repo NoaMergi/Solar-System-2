@@ -23,7 +23,7 @@ public class rotationScript : MonoBehaviour
 
     void Start()
     {
-        Children = GetComponentsInChildren<Transform>();
+        //Children = GetComponentsInChildren<Transform>();
         currentTime = 0f;
         prevRotationAngle = 0;
     }
@@ -56,7 +56,7 @@ public class rotationScript : MonoBehaviour
         {
             camera.transform.parent = transform;
         }*/
-
+        
         foreach (Transform child in Children)
         {
             child.parent = transform;

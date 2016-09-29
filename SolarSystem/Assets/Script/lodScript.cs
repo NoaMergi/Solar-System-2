@@ -5,13 +5,16 @@ public class lodScript : MonoBehaviour
 {
 
     [SerializeField]
-    cameraOrbitControlScript camera;
+    private cameraOrbitControlScript currentCamera;
 
     [SerializeField]
-    GameObject lowPoly;
+    private GameObject lowPoly;
 
     [SerializeField]
-    GameObject highPoly;
+    private GameObject highPoly;
+
+    [SerializeField]
+    private float distanceThreshold;
 
 
 	// Use this for initialization
@@ -23,6 +26,15 @@ public class lodScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        //if (camera.getCameraDistance())
+        if (currentCamera.getCameraDistance() < distanceThreshold)
+        {
+            highPoly.SetActive(true);
+            lowPoly.SetActive(false);
+        }
+        else
+        {
+            highPoly.SetActive(false);
+            lowPoly.SetActive(true);
+        }
 	}
 }
