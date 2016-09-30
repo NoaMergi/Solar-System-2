@@ -10,7 +10,8 @@ public class rotationScript : MonoBehaviour
     public bool isClockwise = true;
     public float rotationPeriodInHours;
 
-    Transform[] Children;
+    //Transform[] Children;
+    List<Transform> children;
 
     public Vector3 offsetAxis;
     public Vector3 rotationAxis = Vector3.up;
@@ -23,7 +24,15 @@ public class rotationScript : MonoBehaviour
 
     void Start()
     {
-        //Children = GetComponentsInChildren<Transform>();
+        children = new List<Transform>();
+        Transform[] childrenArray = GetComponentsInChildren<Transform>();
+        foreach (Transform child in childrenArray)
+        {
+            if (child.parent == transform)
+                children.Add(child);
+            //child is your child transform
+        }
+        
         currentTime = 0f;
         prevRotationAngle = 0;
     }
@@ -57,7 +66,7 @@ public class rotationScript : MonoBehaviour
             camera.transform.parent = transform;
         }*/
         
-        foreach (Transform child in Children)
+        foreach (Transform child in children)
         {
             child.parent = transform;
             //child is your child transform
