@@ -51,5 +51,9 @@ public class inputSystemScript : MonoBehaviour
             //print("scroll down");
             mouseWheelDown.Invoke();
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 }

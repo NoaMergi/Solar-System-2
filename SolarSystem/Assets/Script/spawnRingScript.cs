@@ -99,34 +99,3 @@ public class spawnRingScript : MonoBehaviour
         return f;
     }
 }
-
-/*
-
-
-    public Vector3 Orientation;
-
-    public Vector3 berrayCenter;
-    
-    public bool isPlanet = false;
-
-    [SerializeField]
-    private float A;
-
-    [SerializeField]
-    private float B;
-
-    public bool IsClockwise;
-
-
-    private int Direction;
-
-    [HideInInspector]
-    public Vector3 ScaledberrayCenter;
-
-    [HideInInspector]
-    public float scaledA;
-
-    [HideInInspector]
-    public float scaledB;
-
-    */
