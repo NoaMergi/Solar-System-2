@@ -11,6 +11,16 @@ public class inputSystemScript : MonoBehaviour
     public static event inputSystem mouseRight = delegate { };
     public static event inputSystem mouseUp = delegate { };
     public static event inputSystem mouseDown = delegate { };
+    public static event inputSystem N1 = delegate { };
+    public static event inputSystem N2 = delegate { };
+    public static event inputSystem N3 = delegate { };
+    public static event inputSystem N4 = delegate { };
+    public static event inputSystem N5 = delegate { };
+    public static event inputSystem N6 = delegate { };
+    public static event inputSystem N7 = delegate { };
+    public static event inputSystem N8 = delegate { };
+    public static event inputSystem N9 = delegate { };
+    public static event inputSystem N0 = delegate { };
 
     // Use this for initialization
     void Start ()
@@ -50,6 +60,46 @@ public class inputSystemScript : MonoBehaviour
         {
             //print("scroll down");
             mouseWheelDown.Invoke();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            N1.Invoke();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            N2.Invoke();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            N3.Invoke();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            N4.Invoke();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            N5.Invoke();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            N6.Invoke();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            N7.Invoke();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            N8.Invoke();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            N9.Invoke();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            N0.Invoke();
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
