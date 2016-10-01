@@ -9,11 +9,9 @@ public class lodScript : MonoBehaviour
 
     [SerializeField]
     private GameObject lowPoly;
-    private Transform [] lowPolyChildren;
 
     [SerializeField]
     private GameObject highPoly;
-    private Transform[] highPolyChildren;
 
     [SerializeField]
     private float distanceThreshold;
@@ -22,8 +20,6 @@ public class lodScript : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        lowPolyChildren = lowPoly.transform.GetComponentsInChildren<Transform>();
-        highPolyChildren = highPoly.transform.GetComponentsInChildren<Transform>();
     }
 	
 	// Update is called once per frame
@@ -41,8 +37,4 @@ public class lodScript : MonoBehaviour
         }
 	}
 
-    void changeSatusLowPoly()
-    {
-
-    }
 }
