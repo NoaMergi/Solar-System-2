@@ -9,7 +9,7 @@ public static class objectLoaderScript
 
 	public static void generateBuilding(GameObject parent, int dencity, List<GameObject> container, List<GameObject> choicesList)
     {
-        
+        Debug.Log(parent.GetComponent<SphereCollider>().radius);
         for (int i = 0; i < dencity; ++i)
         {
             GameObject objectToBeSpawned = choicesList[rand.Next(0, choicesList.Count - 1)];
