@@ -9,7 +9,6 @@ public static class objectLoaderScript
 
 	public static void generateBuilding(GameObject parent, int dencity, List<GameObject> container, List<GameObject> choicesList)
     {
-        Debug.Log(parent.GetComponent<SphereCollider>().radius);
         for (int i = 0; i < dencity; ++i)
         {
             GameObject objectToBeSpawned = choicesList[rand.Next(0, choicesList.Count - 1)];
@@ -38,7 +37,8 @@ public static class objectLoaderScript
         do
         {
             pos = Random.onUnitSphere * parent.GetComponent<SphereCollider>().radius + parent.transform.position;
-            objectsColidedWith = Physics.OverlapBox(new Vector3(pos.x, pos.y + (objBounds.size.y / 2), pos.z), objBounds.size / 2, Quaternion.identity);
+
+            objectsColidedWith = Physics.OverlapBox(pos, new Vector3(objBounds.size.x, objBounds.size.y / 2, objBounds.size.z), Quaternion.identity);
 
         } while (objectsColidedWith.Length > 1);
         return pos;

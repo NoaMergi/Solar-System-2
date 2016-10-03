@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class planetObjectContainerScript : MonoBehaviour
 {
@@ -8,7 +9,17 @@ public class planetObjectContainerScript : MonoBehaviour
 
     public List<GameObject> buildingTypes;
 
-    public int buildingDencity;
+    [SerializeField]
+    private int buildingDencity;
+
+
+    //by what amount add or remove buildings 
+    [SerializeField]
+    private int changeInDencity;
+
+    [SerializeField]
+    private int buildingMax;
+
 
     void Awake()
     {
@@ -19,9 +30,7 @@ public class planetObjectContainerScript : MonoBehaviour
 	void Start ()
     {
         objectLoaderScript.generateBuilding(gameObject, buildingDencity, buildings, buildingTypes);
-
-        
-
+        //emptyPlanet();
     }
 	
 	// Update is called once per frame
@@ -29,4 +38,45 @@ public class planetObjectContainerScript : MonoBehaviour
     {
 	
 	}
+
+    void emptyPlanet()
+    {
+        for (int i = 0; i < buildings.Count; ++i)
+        {
+            Destroy(buildings[i]);
+        }
+        buildings.Clear();
+    }
+
+
+    public void addBuildings()
+    {
+        emptyPlanet();
+        buildingDencity += changeInDencity;
+        idiotProf();
+        objectLoaderScript.generateBuilding(gameObject, buildingDencity, buildings, buildingTypes);
+        Debug.Log(buildingDencity);
+    }
+
+    public void removeBuildings()
+    {
+        emptyPlanet();
+        buildingDencity -= changeInDencity;
+        idiotProf();
+        objectLoaderScript.generateBuilding(gameObject, buildingDencity, buildings, buildingTypes);
+        Debug.Log(buildingDencity);
+    }
+
+    public void switchChangeInDencity(string value)
+    {
+        changeInDencity = Int32.Parse(value);
+    }
+
+    private void idiotProf()
+    {
+        if (buildingDencity < 0)
+            buildingDencity = 0;
+        else if (buildingDencity > buildingMax)
+            buildingDencity = buildingMax;
+    }
 }
