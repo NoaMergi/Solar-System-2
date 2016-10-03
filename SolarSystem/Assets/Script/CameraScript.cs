@@ -13,7 +13,7 @@ public class cameraScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-        transform.LookAt(transform.parent.transform.position);
+        transform.LookAt(transform.parent.transform.position - transform.position);
         
         //transform.RotateAround(planet.transform.position,1);
 	}

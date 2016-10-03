@@ -21,6 +21,9 @@ public class cameraOrbitControlScript : MonoBehaviour
 
     private float x, y, z;
 
+    [SerializeField]
+    private float minZoom;
+
     // Use this for initialization
     void Start ()
     {
@@ -79,7 +82,7 @@ public class cameraOrbitControlScript : MonoBehaviour
 
     void zoomIn()
     {
-        if (radius > 1)
+        if (radius > minZoom)
         {
             radius -= zoomVelocity;
         }

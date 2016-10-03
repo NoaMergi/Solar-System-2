@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class CameraControlScript : MonoBehaviour 
+public class cameraControlScript : MonoBehaviour 
 {
 
    public List<Camera> cameras;
@@ -10,70 +10,30 @@ public class CameraControlScript : MonoBehaviour
 	void Start () 
     {
         unableCameras();
-        cameras[0].enabled = true;
+        activateCamera0();
+
+        if (cameras.Count >= 0)
+        {
+            inputSystemScript.N1 += activateCamera0;
+        }
+        if (cameras.Count >= 1)
+        {
+            inputSystemScript.N2 += activateCamera1;
+        }
+        if (cameras.Count >= 2)
+        {
+            inputSystemScript.N3 += activateCamera2;
+        }
+        if (cameras.Count >= 3)
+        {
+            inputSystemScript.N4 += activateCamera3;
+        }
     }
 	
 	// Update is called once per frame
 	void Update () 
     {
-        if (Input.anyKeyDown)
-        {
-            
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                unableCameras();
-                cameras[0].enabled = true;
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                unableCameras();
-                cameras[1].enabled = true;
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                unableCameras();
-                cameras[2].enabled = true;
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                unableCameras();
-                cameras[3].enabled = true;
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha5))
-            {
-                unableCameras();
-                cameras[4].enabled = true;
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha6))
-            {
-                unableCameras();
-                cameras[5].enabled = true;
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha7))
-            {
-                unableCameras();
-                cameras[6].enabled = true;
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha8))
-            {
-                unableCameras();
-                cameras[7].enabled = true;
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha9))
-            {
-                unableCameras();
-                cameras[8].enabled = true;
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha0))
-            {
-                unableCameras();
-                cameras[9].enabled = true;
-            }
-            else if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                Application.Quit();
-            }
-        }
+        
     }
 
     void unableCameras()
@@ -82,5 +42,39 @@ public class CameraControlScript : MonoBehaviour
         {
             camera.GetComponent<Camera>().enabled = false;
         }
+    }
+
+    void OnDestroy()
+    {
+        inputSystemScript.N1 -= activateCamera0;
+        inputSystemScript.N2 -= activateCamera1;
+        inputSystemScript.N3 -= activateCamera2;
+        inputSystemScript.N4 -= activateCamera3;
+    }
+
+    void activateCamera0()
+    {
+        unableCameras();
+        cameras[0].enabled = true;
+    }
+    void activateCamera1()
+    {
+        unableCameras();
+        cameras[1].enabled = true;
+    }
+    void activateCamera2()
+    {
+        unableCameras();
+        cameras[2].enabled = true;
+    }
+    void activateCamera3()
+    {
+        unableCameras();
+        cameras[3].enabled = true;
+    }
+    void activateCamera4()
+    {
+        unableCameras();
+        cameras[4].enabled = true;
     }
 }
